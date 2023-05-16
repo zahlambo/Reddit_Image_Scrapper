@@ -1,0 +1,30 @@
+import os
+import praw
+import requests
+
+# Set up the Reddit API client
+reddit = praw.Reddit(client_id='Client-id',
+                     client_secret='Secret',
+                     user_agent='Scrapper 1.0')
+
+# Define the subreddit and number of posts to scrape
+subreddit_name = 'meme'
+num_posts = 10
+
+folder_name = subreddit_name
+os.makedirs(folder_name, exist_ok=True)
+
+# Fetch the posts from the subreddit
+subreddit = reddit.subreddit(subreddit_name)
+posts = subreddit.new(limit=num_posts)
+
+# Iterate through the posts and download the images
+for post in posts:
+    if post.url.endswith(('.jpg', '.jpeg', '.png', '.gif')):
+        image_url = post.url
+        image_data = requests.get(image_url).content
+        image_name = post.id + image_url[-4:]
+        image_path = os.path.join(folder_name, image_name)
+        with open(image_path, 'wb') as image_file:
+            image_file.write(image_data)
+        print(f"Downloaded image: {image_name}")
