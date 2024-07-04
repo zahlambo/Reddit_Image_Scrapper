@@ -7,7 +7,7 @@ reddit = praw.Reddit(client_id='w7LPuTDQ5325fNf9HvrN4A',
                      client_secret='iOA7-J3ayNVADtrICqAGxang6Zrasw',
                      user_agent='Scrapper 1.0')
 
-subreddits = ['PussyFlashing', 'pussy', 'Fingering','FingeringHerself','IndianBabes','Innie','simps','GodPussy','BreakingTheSeal']
+subreddits = ['meme']
 num_posts = 1000
 
 def download_media(subreddit_name):
